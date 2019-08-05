@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "importHelpers": true,
+    "module": "commonjs",
+    "outDir": "./build",
+    "rootDir": "./build",
+    "target": "es5",
+    "plugins": [{"transform": "typescript-plugin-styled-components"}]
+  },
+  "exclude": ["generate"]
+}

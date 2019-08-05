@@ -1,3 +1,15 @@
+# Built files
+build/
+icos/
+StyledIconBase/
+types/
+
+/index.d.ts
+/index.esm.js
+/index.js
+/index.ts
+/manifest.json
+
 # Logs
 logs
 *.log
