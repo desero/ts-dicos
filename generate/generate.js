@@ -82,7 +82,7 @@ const generate = async () => {
     'index.esm.js',
     'index.js',
     'index.ts',
-    'StyledIconBase',
+    'BaseIcon',
     'types',
   ]
   for (const destinationFile of destinationFiles) {
@@ -134,14 +134,14 @@ const generate = async () => {
     await fs.outputFile(path.join(destinationPath, 'package.json'), pkgJSON(icon.name))
   }
 
-  await fs.mkdirp(path.join(baseDir, 'StyledIconBase'))
+  await fs.mkdirp(path.join(baseDir, 'BaseIcon'))
   await fs.copy(
-    path.join(__dirname, 'templates', 'StyledIconBase.tsx'),
-    path.join(baseDir, 'StyledIconBase', 'StyledIconBase.tsx'),
+    path.join(__dirname, 'templates', 'BaseIcon.tsx'),
+    path.join(baseDir, 'BaseIcon', 'BaseIcon.tsx'),
   )
   await fs.writeFile(
-    path.join(baseDir, 'StyledIconBase', 'package.json'),
-    pkgJSON('StyledIconBase'),
+    path.join(baseDir, 'BaseIcon', 'package.json'),
+    pkgJSON('BaseIcon'),
   )
 
   console.log('Writing index files...')
@@ -180,9 +180,9 @@ export {${PACKS.map(fastCase.camelize).join(', ')}}
   console.log('Writing shared types file...')
 
   const typesFile = () => `import * as React from 'react'
-import {StyledIconProps} from '../StyledIconBase'
-export type StyledIcon = React.ForwardRefExoticComponent<React.PropsWithoutRef<StyledIconProps> & React.RefAttributes<SVGSVGElement>>;
-export {StyledIconProps}
+import {IconProps} from '../BaseIcon'
+export type StyledIcon = React.ForwardRefExoticComponent<React.PropsWithoutRef<IconProps> & React.RefAttributes<SVGSVGElement>>;
+export {IconProps}
 `
 
   await fs.mkdirp(path.join(baseDir, 'types'))
@@ -230,8 +230,8 @@ export {StyledIconProps}
 
   console.log('Rewriting package.json files...')
   await fs.writeFile(
-    path.join(baseDir, 'StyledIconBase', 'package.json'),
-    pkgJSONBuilt('StyledIconBase', '.js'),
+    path.join(baseDir, 'BaseIcon', 'package.json'),
+    pkgJSONBuilt('BaseIcon', '.js'),
   )
   await fs.outputFile(path.join(baseDir, 'types', 'package.json'), pkgJSONBuilt('types', '.js'))
   for (const pack of PACKS) {

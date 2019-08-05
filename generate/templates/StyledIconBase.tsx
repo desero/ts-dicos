@@ -1,13 +1,12 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import validProp from '@emotion/is-prop-valid'
 
-export interface StyledIconProps extends React.PropsWithRef<React.SVGProps<SVGSVGElement>> {
+export interface IconProps extends React.PropsWithRef<React.SVGProps<SVGSVGElement>> {
   size?: number | string
   title?: string | null
 }
 
-interface StyledIconBaseProps {
+interface BaseIconProps {
   iconAttrs: React.SVGProps<SVGSVGElement>
   iconViewBox: string
   iconVerticalAlign: string
@@ -17,8 +16,8 @@ function isValidProp(key: string): key is keyof React.SVGProps<SVGSVGElement> {
   return validProp(key)
 }
 
-function filterSVGProps(props: StyledIconProps): React.SVGProps<SVGSVGElement> {
-  return (Object.keys(props) as Array<keyof (StyledIconProps)>).reduce(
+function filterSVGProps(props: IconProps): React.SVGProps<SVGSVGElement> {
+  return (Object.keys(props) as Array<keyof (IconProps)>).reduce(
     (p, k) => {
       if (isValidProp(k)) {
         // hack to satisfy TypeScript complexity
@@ -30,7 +29,7 @@ function filterSVGProps(props: StyledIconProps): React.SVGProps<SVGSVGElement> {
   )
 }
 
-const StyledIconBaseBase = React.forwardRef<SVGSVGElement, StyledIconProps & StyledIconBaseProps>(
+export const BaseIcon = React.forwardRef<SVGSVGElement, IconProps & BaseIconProps>(
   (props, ref) => {
     const {children, iconAttrs, iconVerticalAlign, iconViewBox, size, title, ...otherProps} = props
 
@@ -54,9 +53,3 @@ const StyledIconBaseBase = React.forwardRef<SVGSVGElement, StyledIconProps & Sty
     )
   },
 )
-
-export const StyledIconBase = styled(StyledIconBaseBase)`
-  display: inline-block;
-  vertical-align: ${props => props.iconVerticalAlign};
-  overflow: hidden;
-`
