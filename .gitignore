@@ -1,7 +1,7 @@
 # Built files
 build/
 icos/
-StyledIconBase/
+BaseIcon/
 types/
 
 /index.d.ts

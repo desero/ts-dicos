@@ -5,8 +5,7 @@
     "module": "commonjs",
     "outDir": "./build",
     "rootDir": "./build",
-    "target": "es5",
-    "plugins": [{"transform": "typescript-plugin-styled-components"}]
+    "target": "es5"
   },
   "exclude": ["generate"]
 }
